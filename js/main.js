@@ -29,36 +29,31 @@ const DESCRIPTIONS = [
   'Donec non ex sit amet orci vestibulum consectetur. Donec nibh nisi, accumsan a varius a, semper at ligula. Suspendisse vitae mauris sapien. Nunc libero libero, consectetur nec imperdiet id, eleifend id justo. Sed massa magna, accumsan id facilisis eu, euismod sed eros. Nam ornare elit auctor, pretium lectus nec, posuere orci. Donec non turpis ac tortor ullamcorper tristique nec ac dui. Cras vestibulum consequat vulputate. Fusce sed justo id sapien fermentum fermentum. Vivamus dictum hendrerit varius. Etiam eu tempus ex. Ut venenatis lectus vel convallis lobortis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris varius diam et risus sollicitudin, nec malesuada risus porttitor. Morbi id ex dignissim, tincidunt nisl vitae, faucibus libero. Aenean lobortis finibus lorem pulvinar molestie.',
 ];
 
-const DESCRIPTION_PHOTOS = [];
-
 /* Взято с https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random */
 const getRandomNumber = (min, max) => {
   if (min < 0 || max < 0) {
-    console.log("Значения диапазона не могут быт меньше нуля!");
     return null;
   } else if (max < min) {
-    console.log("Максимальное значение диапазона не может быть меньше минимального значения!");
     return null;
   } else if ( max == min) {
-    console.log("Минимальное и максимальное значение диапазона не могут быть одинаковыми!");
     return null;
   } else {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 };
 
-const getLengthString = (string, length = "140") => (string.length <= length) ? true : false;
+const getLengthString = (string, length = '140') => (string.length <= length) ? true : false;
 
 const checkCommentID = () => {
-  const COMMENT_INDEXES = [];
+  const commentIndexes = [];
   const id = getRandomNumber(0, 10000000);
 
-  COMMENT_INDEXES.push(id);
+  commentIndexes.push(id);
 
-  if (COMMENT_INDEXES.length > 1) {
-    COMMENT_INDEXES.forEach((value) => {
+  if (commentIndexes.length > 1) {
+    commentIndexes.forEach((value) => {
       if (value == id) {
-        COMMENT_INDEXES.pop();
+        commentIndexes.pop();
       } else {
         return id;
       }
@@ -86,13 +81,13 @@ const createCommentMessage = () => {
 
 const addComment = () => {
   const index = getRandomNumber(1, 5);
-  const COMMENT_MESSEGES = [];
+  const commetMessages = [];
 
   for (let i = 0; i < index; i++) {
-    COMMENT_MESSEGES.push(createCommentMessage());
+    commetMessages.push(createCommentMessage());
   }
 
-  return COMMENT_MESSEGES;
+  return commetMessages;
 };
 
 const createDescriptionPhoto = (index) => {
@@ -110,8 +105,16 @@ const createDescriptionPhoto = (index) => {
   };
 };
 
-for (let i = 0; i < 25; i++) {
-  DESCRIPTION_PHOTOS.push(createDescriptionPhoto(i));
-}
+const addDescriptionPhoto = () => {
+  const descriptionPhotos = [];
 
-console.log(DESCRIPTION_PHOTOS);
+  for (let i = 0; i < 25; i++) {
+    descriptionPhotos.push(createDescriptionPhoto(i));
+  }
+
+  return descriptionPhotos;
+};
+
+getLengthString();
+
+addDescriptionPhoto();

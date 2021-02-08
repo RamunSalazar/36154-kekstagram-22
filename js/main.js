@@ -116,5 +116,4 @@ const addDescriptionPhoto = () => {
 };
 
 getLengthString();
-
 addDescriptionPhoto();

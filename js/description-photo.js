@@ -1,5 +1,5 @@
 import {getRandomNumber} from './util.js';
-import {addComment} from './comment.js';
+import {generateArrayComments} from './comment.js';
 
 const DESCRIPTIONS = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies neque sit amet bibendum rhoncus. Donec in laoreet mi. Etiam at quam ut magna tincidunt pellentesque. Vivamus ac neque vitae sem luctus consequat. Nullam mollis libero felis, in egestas lorem mattis id. Integer eu metus fermentum purus tristique consectetur sed ac purus. Mauris at mauris gravida felis consequat rutrum vitae consequat diam. Aliquam erat volutpat. Curabitur posuere ex et mauris tincidunt, vel posuere nibh venenatis. Vivamus euismod convallis metus, vitae finibus urna consequat vitae. Quisque faucibus lacus eget quam blandit, ut viverra neque mollis. Aliquam id tortor sit amet ex sodales vulputate. Praesent varius, quam id bibendum luctus, diam elit feugiat urna, ac vulputate turpis dolor nec augue.',
@@ -14,29 +14,34 @@ const DESCRIPTIONS = [
   'Donec non ex sit amet orci vestibulum consectetur. Donec nibh nisi, accumsan a varius a, semper at ligula. Suspendisse vitae mauris sapien. Nunc libero libero, consectetur nec imperdiet id, eleifend id justo. Sed massa magna, accumsan id facilisis eu, euismod sed eros. Nam ornare elit auctor, pretium lectus nec, posuere orci. Donec non turpis ac tortor ullamcorper tristique nec ac dui. Cras vestibulum consequat vulputate. Fusce sed justo id sapien fermentum fermentum. Vivamus dictum hendrerit varius. Etiam eu tempus ex. Ut venenatis lectus vel convallis lobortis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris varius diam et risus sollicitudin, nec malesuada risus porttitor. Morbi id ex dignissim, tincidunt nisl vitae, faucibus libero. Aenean lobortis finibus lorem pulvinar molestie.',
 ];
 
+const DEFAULT_DESCRIPTION_INDEX = 25;
+
+const MIN_COUNT_LIKES = 25;
+const MAX_COUNT_LIKES = 200;
+
 const createDescriptionPhoto = (index) => {
   const randomDescriptionIndex = getRandomNumber(0, DESCRIPTIONS.length - 1);
-  const commentArray = addComment();
+  const arrayComments = generateArrayComments();
   const descriptionId = index + 1;
-  const randomLikes = getRandomNumber(15, 200);
+  const randomLikes = getRandomNumber(MIN_COUNT_LIKES, MAX_COUNT_LIKES);
 
   return {
     id: descriptionId,
     url: 'photos/' + descriptionId,
     description: DESCRIPTIONS[randomDescriptionIndex],
     likes: randomLikes,
-    comment: commentArray,
+    comment: arrayComments,
   };
 };
 
-const addDescriptionPhoto = () => {
-  const descriptionPhotos = [];
+const generateArrayDescriptionPhotos = () => {
+  const arrayDescriptionPhotos = [];
 
-  for (let i = 0; i < 25; i++) {
-    descriptionPhotos.push(createDescriptionPhoto(i));
+  for (let i = 0; i < DEFAULT_DESCRIPTION_INDEX; i++) {
+    arrayDescriptionPhotos.push(createDescriptionPhoto(i));
   }
 
-  return descriptionPhotos;
+  return arrayDescriptionPhotos;
 };
 
-export {addDescriptionPhoto};
+export {generateArrayDescriptionPhotos};

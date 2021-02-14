@@ -19,30 +19,29 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+const DEFAULT_COMMENT_INDEX = 7;
 
-const checkCommentID = () => {
+const getCommentId = () => {
   const commentIndexes = [];
-  const id = getRandomNumber(0, 10000000);
+  const commentId = getRandomNumber(0, 10000000);
 
-  commentIndexes.push(id);
+  commentIndexes.push(commentId);
 
   if (commentIndexes.length > 1) {
     commentIndexes.forEach((value) => {
-      if (value == id) {
+      if (value == commentId) {
         commentIndexes.pop();
       } else {
-        return id;
+        return commentId;
       }
     });
-  } else {
-    return id;
   }
 
-  return id;
+  return commentId;
 };
 
-const createCommentMessage = () => {
-  const randomID = checkCommentID();
+const generateCommentMessage = () => {
+  const randomID = getCommentId();
   const randomNameIndex = getRandomNumber(0, NAMES.length - 1);
   const avatarIndex = randomNameIndex + 1;
   const randomMessageIndex = getRandomNumber(0, MESSAGES.length - 1);
@@ -55,15 +54,15 @@ const createCommentMessage = () => {
   };
 };
 
-const addComment = () => {
-  const index = getRandomNumber(1, 5);
-  const commetMessages = [];
+const generateArrayComments = () => {
+  const index = getRandomNumber(1, DEFAULT_COMMENT_INDEX);
+  const arrayComments = [];
 
   for (let i = 0; i < index; i++) {
-    commetMessages.push(createCommentMessage());
+    arrayComments.push(generateCommentMessage());
   }
 
-  return commetMessages;
+  return arrayComments;
 };
 
-export {addComment};
+export {generateCommentMessage, generateArrayComments};

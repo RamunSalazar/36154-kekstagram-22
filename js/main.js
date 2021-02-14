@@ -1,6 +1,6 @@
-import {getLengthString} from './util.js';
-import {addDescriptionPhoto} from './description-photo.js';
-import {addComment} from './comment.js';
+import {isStringLength} from './util.js';
+import {generateArrayDescriptionPhotos} from './description-photo.js';
+import {generateCommentMessage} from './comment.js';
 
-getLengthString(addComment());
-addDescriptionPhoto();
+isStringLength(generateCommentMessage().message);
+generateArrayDescriptionPhotos();

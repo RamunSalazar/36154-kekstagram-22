@@ -1,4 +1,5 @@
 import {generateArrayDescriptionPhotos} from './description-photo.js';
+import {displayFullSizePhoto} from './fullsize-photo.js';
 
 const pictures = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -11,6 +12,9 @@ const drawingThumbnailPhoto = () => {
     picture.querySelector('.picture__img').setAttribute('src', element.url);
     picture.querySelector('.picture__likes').textContent = element.likes;
     picture.querySelector('.picture__comments').textContent = element.comment.length;
+
+    picture.addEventListener('click', displayFullSizePhoto(element));
+
     fragment.appendChild(picture);
   });
 

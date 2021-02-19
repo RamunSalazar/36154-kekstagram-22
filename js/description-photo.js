@@ -27,7 +27,7 @@ const createDescriptionPhoto = (index) => {
 
   return {
     id: descriptionId,
-    url: 'photos/' + descriptionId + '.jpg',
+    url: `photos/${descriptionId}.jpg`,
     description: DESCRIPTIONS[randomDescriptionIndex],
     likes: randomLikes,
     comment: arrayComments,

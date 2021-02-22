@@ -9,7 +9,6 @@ const NAMES = [
   'Екатерина',
 ];
 
-
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -48,7 +47,7 @@ const generateCommentMessage = () => {
 
   return {
     id: randomID,
-    avatar: 'img/avatar-' + avatarIndex + '.svg',
+    avatar: `img/avatar-${avatarIndex}.svg`,
     message: MESSAGES[randomMessageIndex],
     name: NAMES[randomNameIndex],
   };

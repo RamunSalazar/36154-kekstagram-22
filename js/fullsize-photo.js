@@ -1,22 +1,22 @@
-const bigPicture = document.querySelector('.big-picture');
-const bigPictureCancel = document.querySelector('.big-picture__cancel');
-const socialCommentsList = document.querySelector('.social__comments');
-const socialCommentsItem = document.querySelector('.social__comment');
+const bigPictureElement = document.querySelector('.big-picture');
+const bigPictureCancelElement = document.querySelector('.big-picture__cancel');
+const socialCommentsListElement = document.querySelector('.social__comments');
+const socialCommentsItemElement = document.querySelector('.social__comment');
 const fragment = document.createDocumentFragment();
-const socialCommentCount = document.querySelector('.social__comment-count');
-const commentsLoader = document.querySelector('.comments-loader');
-const body = document.querySelector('body');
+const socialCommentCountElement = document.querySelector('.social__comment-count');
+const commentsLoaderElement = document.querySelector('.comments-loader');
+const bodyElement = document.querySelector('bodyElement');
 
 const displayFullSizePhoto = (picture) => {
   return (evt) => {
     evt.preventDefault();
-    bigPicture.classList.remove('hidden');
-    socialCommentCount.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
-    body.classList.add('modal-open');
+    bigPictureElement.classList.remove('hidden');
+    socialCommentCountElement.classList.add('hidden');
+    commentsLoaderElement.classList.add('hidden');
+    bodyElement.classList.add('modal-open');
 
-    while (socialCommentsList.firstChild) {
-      socialCommentsList.removeChild(socialCommentsList.firstChild);
+    while (socialCommentsListElement.firstChild) {
+      socialCommentsListElement.removeChild(socialCommentsListElement.firstChild);
     }
 
     document.querySelector('.big-picture__img').firstElementChild.setAttribute('src', picture.url);
@@ -25,20 +25,20 @@ const displayFullSizePhoto = (picture) => {
     document.querySelector('.comments-count').textContent = picture.comment.length;
 
     picture.comment.forEach((element) => {
-      const comment = socialCommentsItem.cloneNode(true);
+      const comment = socialCommentsItemElement.cloneNode(true);
       comment.firstElementChild.setAttribute('src', element.avatar);
       comment.firstElementChild.setAttribute('alt', element.name);
       comment.querySelector('.social__text').textContent = element.message;
       fragment.appendChild(comment);
     });
 
-    socialCommentsList.appendChild(fragment);
+    socialCommentsListElement.appendChild(fragment);
   }
 }
 
-bigPictureCancel.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  body.classList.remove('modal-open');
+bigPictureCancelElement.addEventListener('click', () => {
+  bigPictureElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
 });
 
 export {displayFullSizePhoto};

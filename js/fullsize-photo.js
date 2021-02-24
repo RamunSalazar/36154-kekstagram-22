@@ -5,7 +5,7 @@ const socialCommentsItemElement = document.querySelector('.social__comment');
 const fragment = document.createDocumentFragment();
 const socialCommentCountElement = document.querySelector('.social__comment-count');
 const commentsLoaderElement = document.querySelector('.comments-loader');
-const bodyElement = document.querySelector('bodyElement');
+const bodyElement = document.querySelector('body');
 
 const displayFullSizePhoto = (picture) => {
   return (evt) => {

@@ -19,7 +19,7 @@ const isHashtaEnglishgLetter = (hashtag) => {
 }
 
 const isHashtagSymbol = (hashtag) => {
-  const pattern = /[-!$%^&*№()_+|~=`\\{}\[\]:";'<>?,.\/]/;
+  const pattern = /[-!$%^&*№()_+|~=`\\{}\]:";'<>?,.]/;
   return pattern.test(hashtag);
 }
 
@@ -36,7 +36,7 @@ const isHashtagSharp = (hashtag) => {
       break;
     } else {
       isSharp = false;
-    };
+    }
   }
   return isSharp;
 }
@@ -49,7 +49,7 @@ const isHastagEqual = (hashtagsArray) => {
       break;
     } else {
       isEqual = false;
-    };
+    }
   }
   return isEqual;
 }
@@ -60,7 +60,6 @@ const validateHashtags = () => {
       return true;
     } else {
       const hashtagsArray = hashtagInputElement.value.split(' ');
-      console.log(hashtagsArray);
       for (let i = 0; i < hashtagsArray.length; i++) {
         if (hashtagsArray[i][0] == '#') {
           if (hashtagsArray[i][1] !== '#') {
@@ -114,7 +113,6 @@ const validateComments = () => {
       return true;
     } else {
       if (isStringLength(hashtagTextAreaElement.value)) {
-        console.log(isStringLength(hashtagTextAreaElement.value));
         return true;
       } else {
         hashtagTextAreaElement.setCustomValidity('Длинна коментария не должна превышать 140 символов');

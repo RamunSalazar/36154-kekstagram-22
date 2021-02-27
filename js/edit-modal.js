@@ -79,7 +79,7 @@ const closeEditModal = () => {
   });
 
   window.addEventListener('keydown', (evt) => {
-    if (evt.keyCode == ESCAPE_KEY_CODE) {
+    if (evt.keyCode === ESCAPE_KEY_CODE && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
       upLoadFileElement.value = '';
       imageUpLoadOverlayElement.classList.add('hidden');
       bodyElement.classList.remove('modal-open');
@@ -95,7 +95,7 @@ const scaleUpLoadImage = () => {
   scaleControlSmallerElement.addEventListener('click', () => {
     value -= SCALE_STEP;
 
-    if (value == IMAGE_SCALE_MIN) {
+    if (value === IMAGE_SCALE_MIN) {
       scaleControlSmallerElement.setAttribute('disabled', 'disabled');
     }
 
@@ -107,7 +107,7 @@ const scaleUpLoadImage = () => {
   scaleControlBiggerElement.addEventListener('click', () => {
     value += SCALE_STEP;
 
-    if (value == IMAGE_SCALE_MAX) {
+    if (value === IMAGE_SCALE_MAX) {
       scaleControlBiggerElement.setAttribute('disabled', 'disabled');
     }
 
@@ -125,7 +125,7 @@ const changeFilterEffect = () => {
       previewImageElement.className = '';
       previewImageElement.classList.add(String(effectSpanListElement[i].classList[1]));
 
-      if (effectSpanListElement[i].classList[1] == 'effects__preview--none') {
+      if (effectSpanListElement[i].classList[1] === 'effects__preview--none') {
         previewImageElement.className = '';
         sliderElement.style.display = 'none';
         sliderElement.noUiSlider.updateOptions({
@@ -136,7 +136,7 @@ const changeFilterEffect = () => {
           start: EFFECT_REVIEW_START,
           step: EFFECT_REVIEW_STEP,
         });
-      } else if (effectSpanListElement[i].classList[1] == 'effects__preview--chrome' || effectSpanListElement[i].classList[1] == 'effects__preview--sepia') {
+      } else if (effectSpanListElement[i].classList[1] === 'effects__preview--chrome' || effectSpanListElement[i].classList[1] === 'effects__preview--sepia') {
         sliderElement.style.display = 'block';
         sliderElement.noUiSlider.updateOptions({
           range: {
@@ -146,7 +146,7 @@ const changeFilterEffect = () => {
           start: EFFECT_REVIEW_CHROME_START,
           step: EFFECT_REVIEW_CHROME_STEP,
         });
-      } else if (effectSpanListElement[i].classList[1] == 'effects__preview--marvin') {
+      } else if (effectSpanListElement[i].classList[1] === 'effects__preview--marvin') {
         sliderElement.style.display = 'block';
         sliderElement.noUiSlider.updateOptions({
           range: {
@@ -156,7 +156,7 @@ const changeFilterEffect = () => {
           start: EFFECT_REVIEW_MARVIN_START,
           step: EFFECT_REVIEW_MARVIN_STEP,
         });
-      } else if (effectSpanListElement[i].classList[1] == 'effects__preview--phobos') {
+      } else if (effectSpanListElement[i].classList[1] === 'effects__preview--phobos') {
         sliderElement.style.display = 'block';
         sliderElement.noUiSlider.updateOptions({
           range: {
@@ -166,7 +166,7 @@ const changeFilterEffect = () => {
           start: EFFECT_REVIEW_PHOBOS_START,
           step: EFFECT_REVIEW_PHOBOS_STEP,
         });
-      } else if (effectSpanListElement[i].classList[1] == 'effects__preview--heat') {
+      } else if (effectSpanListElement[i].classList[1] === 'effects__preview--heat') {
         sliderElement.style.display = 'block';
         sliderElement.noUiSlider.updateOptions({
           range: {

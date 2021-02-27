@@ -2,9 +2,7 @@ import {isStringLength} from './util.js';
 
 const hashtagInputElement = document.querySelector('.text__hashtags');
 const hashtagTextAreaElement = document.querySelector('.text__description');
-const imageUpLoadSubmitElement = document.querySelector('.img-upload__submit');
 
-const HASHTAG_LENGTH_MIN = 1;
 const HASHTAG_LENGTH_MAX = 20;
 const HASHTAGS_ARRAY_LENGTH_MAX = 5;
 
@@ -29,95 +27,70 @@ const isHashtagEmoji = (hashtag) => {
 }
 
 const isHashtagSharp = (hashtag) => {
-  let isSharp;
   for (let i = 1; i < hashtag.length; i++) {
-    if (hashtag[i] == '#') {
-      isSharp = true;
-      break;
-    } else {
-      isSharp = false;
+    if (hashtag[i] === '#') {
+      return true;
     }
   }
-  return isSharp;
+  return false;
 }
 
 const isHastagEqual = (hashtagsArray) => {
-  let isEqual;
   for (let i = 0; i < hashtagsArray.length - 1; i++) {
-    if (hashtagsArray[i].toUpperCase() == hashtagsArray[i+1].toUpperCase()) {
-      isEqual = true;
-      break;
-    } else {
-      isEqual = false;
+    if (hashtagsArray[i].toUpperCase() === hashtagsArray[i+1].toUpperCase()) {
+      return true;
     }
   }
-  return isEqual;
+  return false;
 }
 
 const validateHashtags = () => {
-  imageUpLoadSubmitElement.addEventListener('click', () => {
-    if (hashtagInputElement.value == '') {
+  hashtagInputElement.addEventListener('input', () => {
+    if (hashtagInputElement.value === '') {
       return true;
     } else {
       const hashtagsArray = hashtagInputElement.value.split(' ');
       for (let i = 0; i < hashtagsArray.length; i++) {
-        if (hashtagsArray[i][0] == '#') {
-          if (hashtagsArray[i][1] !== '#') {
-            if (hashtagsArray[i].length !== HASHTAG_LENGTH_MIN && hashtagsArray[i][0] == '#') {
-              if (hashtagsArray[i].length <= HASHTAG_LENGTH_MAX) {
-                if (isHashtagLetter(hashtagsArray[i]) && !isHashtaEnglishgLetter(hashtagsArray[i]) && !isHashtagSymbol(hashtagsArray[i]) && !isHashtagEmoji(hashtagsArray[i])) {
-                  if (!isHashtagSharp(hashtagsArray[i])) {
-                    if (!isHastagEqual(hashtagsArray)) {
-                      if (hashtagsArray.length <= HASHTAGS_ARRAY_LENGTH_MAX) {
-                        continue;
-                      } else {
-                        hashtagInputElement.setCustomValidity('Количество хештегов не может быть больше 5');
-                        hashtagInputElement.reportValidity();
-                      }
-                    } else {
-                      hashtagInputElement.setCustomValidity('Не может быть двух одинаковых хештегов');
-                      hashtagInputElement.reportValidity();
-                    }
-                  } else {
-                    hashtagInputElement.setCustomValidity('В хештег # может быть только в начале');
-                    hashtagInputElement.reportValidity();
-                  }
-                } else {
-                  hashtagInputElement.setCustomValidity('Хештег должен быть написан кирилицей, а так же не может содержать специальные символы и эмодзи');
-                  hashtagInputElement.reportValidity();
-                }
-              } else {
-                hashtagInputElement.setCustomValidity('Хештег не может быть длиннее 20 сиволов включая символ #');
-                hashtagInputElement.reportValidity();
-              }
-            } else {
-              hashtagInputElement.setCustomValidity('Хештег не может состоять только из символа #');
-              hashtagInputElement.reportValidity();
-            }
-          } else {
-            hashtagInputElement.setCustomValidity('В хештеге не должено быть двух # подряд');
-            hashtagInputElement.reportValidity();
-          }
-        } else {
+        if (hashtagsArray[i][0] !== '#') {
           hashtagInputElement.setCustomValidity('Хештег должен начинаться #');
-          hashtagInputElement.reportValidity();
+        } else if (hashtagsArray[i][1] === '#') {
+          hashtagInputElement.setCustomValidity('В хештеге не должено быть подряд нескольких #');
+        } else if (hashtagsArray[i][1] === ' ') {
+          hashtagInputElement.setCustomValidity('Хештег не может состоять только из символа #');
+        } else if (hashtagsArray[i].length > HASHTAG_LENGTH_MAX) {
+          hashtagInputElement.setCustomValidity('Хештег не может быть длиннее 20 сиволов включая символ #');
+        } else if (!isHashtagLetter(hashtagsArray[i]) && isHashtaEnglishgLetter(hashtagsArray[i])) {
+          hashtagInputElement.setCustomValidity('Хештег должен быть написан кирилицей, может содержать как строчные так и прописные буквы, а так же цыфры');
+        } else if (isHashtagSymbol(hashtagsArray[i])) {
+          hashtagInputElement.setCustomValidity('Хештег не может содержать специальных символов');
+        } else if (isHashtagEmoji(hashtagsArray[i])) {
+          hashtagInputElement.setCustomValidity('Хештег не может содержать эмодзи');
+        } else if (isHashtagSharp(hashtagsArray[i])) {
+          hashtagInputElement.setCustomValidity('В хештеге # может быть только в начале');
+        } else if (isHastagEqual(hashtagsArray)) {
+          hashtagInputElement.setCustomValidity('Не может быть двух одинаковых хештегов');
+        } else if (hashtagsArray.length > HASHTAGS_ARRAY_LENGTH_MAX) {
+          hashtagInputElement.setCustomValidity('Количество хештегов не может быть больше 5');
+        } else {
+          hashtagInputElement.setCustomValidity('');
         }
       }
+      hashtagInputElement.reportValidity();
     }
   });
 }
 
 const validateComments = () => {
-  imageUpLoadSubmitElement.addEventListener('click', () => {
-    if (hashtagTextAreaElement.value == '') {
+  hashtagTextAreaElement.addEventListener('input', () => {
+    if (hashtagTextAreaElement.value === '') {
       return true;
     } else {
-      if (isStringLength(hashtagTextAreaElement.value)) {
-        return true;
-      } else {
+      if (!isStringLength(hashtagTextAreaElement.value)) {
         hashtagTextAreaElement.setCustomValidity('Длинна коментария не должна превышать 140 символов');
-        hashtagTextAreaElement.reportValidity();
+      } else {
+        hashtagTextAreaElement.setCustomValidity('');
       }
+      hashtagTextAreaElement.reportValidity();
     }
   });
 }

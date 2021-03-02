@@ -67,16 +67,13 @@ const displayFetchErrorMessage = () => {
 }
 
 const getServerData = () => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
-  .then((response) => {
+  fetch('https://22.javascript.pages.academy/kekstagram/data').then((response) => {
     if (response.ok) {
       return response.json();
     } else {
       showAlert('Ошибка сервера!');
     }
-  })
-  .then((photo) => drawingThumbnailPhoto(photo))
-  .catch(() => showAlert('Ошибка сервера!'));
+  }).then((photo) => drawingThumbnailPhoto(photo)).catch(() => showAlert('Ошибка сервера!'));
 }
 
 const sendServerData = () => {
@@ -84,20 +81,17 @@ const sendServerData = () => {
     evt.preventDefault();
     const formData = new FormData(evt.target);
 
-    fetch('https://22.javascript.pages.academy/kekstagram',
-    {
+    fetch('https://22.javascript.pages.academy/kekstagram', {
       method: 'POST',
       body: formData,
-    })
-    .then((response) => {
+    }).then((response) => {
       if (response) {
         closeEditModal();
         displayFetchSuccessMessage();
       } else {
         displayFetchErrorMessage();
       }
-    })
-    .catch(() => displayFetchErrorMessage());
+    }).catch(() => displayFetchErrorMessage());
   });
 }
 

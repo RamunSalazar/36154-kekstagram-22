@@ -2,7 +2,7 @@
 
 const upLoadFileElement = document.querySelector('#upload-file');
 const imageUpLoadOverlayElement = document.querySelector('.img-upload__overlay');
-const bodyElement = document.querySelector('body');
+const bodyElement = document.querySelector('.body');
 const imageUpLoadCancelElement = document.querySelector('#upload-cancel');
 const scaleControlSmallerElement = document.querySelector('.scale__control--smaller');
 const scaleControlBiggerElement = document.querySelector('.scale__control--bigger');

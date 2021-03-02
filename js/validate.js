@@ -52,24 +52,44 @@ const validateHashtags = () => {
       const hashtagsArray = hashtagInputElement.value.split(' ');
       for (let i = 0; i < hashtagsArray.length; i++) {
         if (hashtagsArray[i][0] !== '#') {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Хештег должен начинаться #');
         } else if (hashtagsArray[i][1] === '#') {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('В хештеге не должено быть подряд нескольких #');
         } else if (hashtagsArray[i][1] === ' ') {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Хештег не может состоять только из символа #');
         } else if (hashtagsArray[i].length > HASHTAG_LENGTH_MAX) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Хештег не может быть длиннее 20 сиволов включая символ #');
         } else if (!isHashtagLetter(hashtagsArray[i]) && isHashtaEnglishgLetter(hashtagsArray[i])) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Хештег должен быть написан кирилицей, может содержать как строчные так и прописные буквы, а так же цыфры');
         } else if (isHashtagSymbol(hashtagsArray[i])) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Хештег не может содержать специальных символов');
         } else if (isHashtagEmoji(hashtagsArray[i])) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Хештег не может содержать эмодзи');
         } else if (isHashtagSharp(hashtagsArray[i])) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('В хештеге # может быть только в начале');
         } else if (isHastagEqual(hashtagsArray)) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Не может быть двух одинаковых хештегов');
         } else if (hashtagsArray.length > HASHTAGS_ARRAY_LENGTH_MAX) {
+          hashtagInputElement.style.borderColor = 'red';
+          hashtagInputElement.style.outlineColor = 'red';
           hashtagInputElement.setCustomValidity('Количество хештегов не может быть больше 5');
         } else {
           hashtagInputElement.setCustomValidity('');

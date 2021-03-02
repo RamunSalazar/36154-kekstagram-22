@@ -1,16 +1,12 @@
-import {isStringLength} from './util.js';
-import {generateArrayDescriptionPhotos} from './description-photo.js';
-import {generateCommentMessage} from './comment.js';
-import {drawingThumbnailPhoto} from './thumbnail-photo.js';
 import {displayEditModal, closeEditModal, scaleUpLoadImage, changeFilterEffect} from './edit-modal.js';
 import {validateHashtags, validateComments} from './validate.js';
+import {getServerData, sendServerData} from './server.js';
 
-isStringLength(generateCommentMessage().message);
-generateArrayDescriptionPhotos();
-drawingThumbnailPhoto();
+getServerData();
 displayEditModal();
 closeEditModal();
 scaleUpLoadImage();
 changeFilterEffect();
 validateHashtags();
 validateComments();
+sendServerData();

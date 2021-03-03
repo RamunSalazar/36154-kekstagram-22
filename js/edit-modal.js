@@ -38,6 +38,7 @@ const EFFECT_REVIEW_HEAT_MIN = 1;
 const EFFECT_REVIEW_HEAT_MAX = 3;
 const EFFECT_REVIEW_HEAT_STEP = 0.1;
 const EFFECT_REVIEW_HEAT_START = 3;
+const DEFAULT_SCALE_VALUE = '100%';
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -60,6 +61,18 @@ noUiSlider.create(sliderElement, {
   },
 });
 
+const cleanEditModal = () => {
+  upLoadFileElement.value = '';
+  imageUpLoadOverlayElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  sliderElement.style.display = 'none';
+  effectInputElement.setAttribute('value', '');
+  scaleInputElement.setAttribute('value', DEFAULT_SCALE_VALUE);
+  previewImageElement.style.transform = String('scale(' + parseInt(DEFAULT_SCALE_VALUE.slice(0, -1))/SCALE_DIVIDER + ')');
+  previewImageElement.className = '';
+  document.querySelector('#effect-none').checked = 'true';
+}
+
 const displayEditModal = () => {
   upLoadFileElement.addEventListener('change', () => {
     imageUpLoadOverlayElement.classList.remove('hidden');
@@ -71,20 +84,12 @@ const displayEditModal = () => {
 
 const closeEditModal = () => {
   imageUpLoadCancelElement.addEventListener('click', () => {
-    upLoadFileElement.value = '';
-    imageUpLoadOverlayElement.classList.add('hidden');
-    bodyElement.classList.remove('modal-open');
-    sliderElement.style.display = 'none';
-    effectInputElement.setAttribute('value', '');
+    cleanEditModal();
   });
 
   window.addEventListener('keydown', (evt) => {
     if (evt.keyCode === ESCAPE_KEY_CODE && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
-      upLoadFileElement.value = '';
-      imageUpLoadOverlayElement.classList.add('hidden');
-      bodyElement.classList.remove('modal-open');
-      sliderElement.style.display = 'none';
-      effectInputElement.setAttribute('value', '');
+      cleanEditModal();
     }
   });
 };
@@ -212,4 +217,4 @@ const changeFilterEffect = () => {
   }
 }
 
-export {displayEditModal, closeEditModal, scaleUpLoadImage, changeFilterEffect};
+export {displayEditModal, closeEditModal, scaleUpLoadImage, changeFilterEffect, cleanEditModal};

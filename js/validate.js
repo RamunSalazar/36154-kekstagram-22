@@ -1,7 +1,7 @@
 import {isStringLength} from './util.js';
 
 const hashtagInputElement = document.querySelector('.text__hashtags');
-const hashtagTextAreaElement = document.querySelector('.text__description');
+const commentTextAreaElement = document.querySelector('.text__description');
 
 const HASHTAG_LENGTH_MAX = 20;
 const HASHTAGS_ARRAY_LENGTH_MAX = 5;
@@ -47,51 +47,44 @@ const isHastagEqual = (hashtagsArray) => {
 const validateHashtags = () => {
   hashtagInputElement.addEventListener('input', () => {
     if (hashtagInputElement.value === '') {
+      hashtagInputElement.setCustomValidity('');
+      hashtagInputElement.classList.remove('validate-error');
       return true;
     } else {
       const hashtagsArray = hashtagInputElement.value.split(' ');
       for (let i = 0; i < hashtagsArray.length; i++) {
         if (hashtagsArray[i][0] !== '#') {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег должен начинаться #');
         } else if (hashtagsArray[i][1] === '#') {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('В хештеге не должено быть подряд нескольких #');
         } else if (hashtagsArray[i][1] === ' ') {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может состоять только из символа #');
         } else if (hashtagsArray[i].length > HASHTAG_LENGTH_MAX) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может быть длиннее 20 сиволов включая символ #');
         } else if (!isHashtagLetter(hashtagsArray[i]) && isHashtaEnglishgLetter(hashtagsArray[i])) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег должен быть написан кирилицей, может содержать как строчные так и прописные буквы, а так же цыфры');
         } else if (isHashtagSymbol(hashtagsArray[i])) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может содержать специальных символов');
         } else if (isHashtagEmoji(hashtagsArray[i])) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может содержать эмодзи');
         } else if (isHashtagSharp(hashtagsArray[i])) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('В хештеге # может быть только в начале');
         } else if (isHastagEqual(hashtagsArray)) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Не может быть двух одинаковых хештегов');
         } else if (hashtagsArray.length > HASHTAGS_ARRAY_LENGTH_MAX) {
-          hashtagInputElement.style.borderColor = 'red';
-          hashtagInputElement.style.outlineColor = 'red';
+          hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Количество хештегов не может быть больше 5');
         } else {
+          hashtagInputElement.classList.remove('validate-error');
           hashtagInputElement.setCustomValidity('');
         }
       }
@@ -101,16 +94,20 @@ const validateHashtags = () => {
 }
 
 const validateComments = () => {
-  hashtagTextAreaElement.addEventListener('input', () => {
-    if (hashtagTextAreaElement.value === '') {
+  commentTextAreaElement.addEventListener('input', () => {
+    if (commentTextAreaElement.value === '') {
+      commentTextAreaElement.setCustomValidity('');
+      commentTextAreaElement.classList.remove('validate-error');
       return true;
     } else {
-      if (!isStringLength(hashtagTextAreaElement.value)) {
-        hashtagTextAreaElement.setCustomValidity('Длинна коментария не должна превышать 140 символов');
+      if (!isStringLength(commentTextAreaElement.value)) {
+        commentTextAreaElement.classList.add('validate-error');
+        commentTextAreaElement.setCustomValidity('Длинна коментария не должна превышать 140 символов');
       } else {
-        hashtagTextAreaElement.setCustomValidity('');
+        commentTextAreaElement.classList.remove('validate-error');
+        commentTextAreaElement.setCustomValidity('');
       }
-      hashtagTextAreaElement.reportValidity();
+      commentTextAreaElement.reportValidity();
     }
   });
 }

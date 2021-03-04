@@ -4,6 +4,12 @@ const picturesElement = document.querySelector('.pictures');
 const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();
 
+const sortCommentsArray = (A, B) => {
+  const a = A.comments.length;
+  const b = B.comments.length
+  return b - a;
+}
+
 const drawingThumbnailPhoto = (thumbnailsPhotos) => {
   thumbnailsPhotos.forEach((element) => {
     const picture = pictureTemplateElement.cloneNode(true);
@@ -15,6 +21,11 @@ const drawingThumbnailPhoto = (thumbnailsPhotos) => {
 
     fragment.appendChild(picture);
   });
+
+
+  while (picturesElement.querySelector('.picture')) {
+    picturesElement.removeChild(picturesElement.querySelector('.picture'));
+  }
 
   picturesElement.appendChild(fragment);
 }

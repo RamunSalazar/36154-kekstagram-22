@@ -1,4 +1,3 @@
-import {drawingThumbnailPhoto} from './thumbnail-photo.js';
 import {showAlert} from './util.js';
 import {cleanEditModal} from './edit-modal.js';
 
@@ -39,14 +38,15 @@ const displayFetchMEssage = (str) => {
   });
 }
 
-const getServerData = () => {
+const getServerData = (onSuccess) => {
   fetch(GET_DATA_API_URL).then((response) => {
     if (response.ok) {
+      document.querySelector('.img-filters').classList.remove('img-filters--inactive');
       return response.json();
     } else {
       showAlert('Ошибка сервера!');
     }
-  }).then((photo) => drawingThumbnailPhoto(photo));
+  }).then((photo) => onSuccess(photo));
 }
 
 const sendServerData = () => {

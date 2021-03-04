@@ -22,9 +22,9 @@ const displayFullSizePhoto = (picture) => {
     document.querySelector('.big-picture__img').firstElementChild.setAttribute('src', picture.url);
     document.querySelector('.social__caption').textContent = picture.description;
     document.querySelector('.likes-count').textContent = picture.likes;
-    document.querySelector('.comments-count').textContent = picture.comment.length;
+    document.querySelector('.comments-count').textContent = picture.comments.length;
 
-    picture.comment.forEach((element) => {
+    picture.comments.forEach((element) => {
       const comment = socialCommentsItemElement.cloneNode(true);
       comment.firstElementChild.setAttribute('src', element.avatar);
       comment.firstElementChild.setAttribute('alt', element.name);

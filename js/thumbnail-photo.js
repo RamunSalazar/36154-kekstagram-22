@@ -16,6 +16,11 @@ const drawingThumbnailPhoto = (thumbnailsPhotos) => {
     fragment.appendChild(picture);
   });
 
+
+  while (picturesElement.querySelector('.picture')) {
+    picturesElement.removeChild(picturesElement.querySelector('.picture'));
+  }
+
   picturesElement.appendChild(fragment);
 }
 

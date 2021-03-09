@@ -48,37 +48,28 @@ const displayFullSizePhoto = (picture) => {
 
 commentsLoaderElement.addEventListener('click', () => {
   const commentsElement = document.querySelectorAll('.social__comment');
-  const commentCounter = commentsElement.length;
   let comments = 0;
   let commentsHidden = 0;
 
-  for (let i = 0; i < commentCounter; i++) {
-    if (!commentsElement[i].classList.contains('hidden')) {
+  commentsElement.forEach((element) => {
+    if (!element.classList.contains('hidden')) {
       comments++;
-    } else {
-      commentsHidden++;
     }
-  }
+  });
+  commentsHidden = commentsElement.length - comments;
 
   if (commentsHidden <= DEFAULT_COMMENT_COUNTER) {
-    for (let i = comments; i < commentCounter; i++) {
+    for (let i = comments; i < commentsElement.length; i++) {
       commentsElement[i].classList.remove('hidden');
     }
-    socialCommentCountElement.textContent = commentCounter + ' из ' + commentCounter + ' комментариев';
+    socialCommentCountElement.textContent = commentsElement.length + ' из ' + commentsElement.length + ' комментариев';
     document.querySelector('.social__comments-loader').classList.add('hidden');
   } else {
-    let j = 0;
-    for (let i = comments; j < DEFAULT_COMMENT_COUNTER; i++) {
-      j++;
+    for (let i = comments, j = 0; j < DEFAULT_COMMENT_COUNTER; i++, j++) {
       commentsElement[i].classList.remove('hidden');
     }
-    comments = 0;
-    for (let i = 0; i < commentCounter; i++) {
-      if (!commentsElement[i].classList.contains('hidden')) {
-        comments++;
-      }
-    }
-    socialCommentCountElement.textContent = comments + ' из ' + commentCounter + ' комментариев';
+    comments += DEFAULT_COMMENT_COUNTER;
+    socialCommentCountElement.textContent = comments + ' из ' + commentsElement.length + ' комментариев';
   }
 });
 

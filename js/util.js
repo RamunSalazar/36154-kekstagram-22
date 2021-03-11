@@ -1,3 +1,5 @@
+'use strict';
+
 const DEFAULT_STRING_LENGTH = 140;
 const ALERT_SHOW_TIME = 5000;
 

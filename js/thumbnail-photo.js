@@ -1,3 +1,5 @@
+'use strict';
+
 import {displayFullSizePhoto} from './fullsize-photo.js';
 
 const picturesElement = document.querySelector('.pictures');

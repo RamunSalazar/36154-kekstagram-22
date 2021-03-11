@@ -1,3 +1,5 @@
+'use strict';
+
 import {isStringLength} from './util.js';
 
 const hashtagInputElement = document.querySelector('.text__hashtags');

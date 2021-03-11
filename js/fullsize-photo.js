@@ -1,3 +1,5 @@
+'use strict';
+
 const bigPictureElement = document.querySelector('.big-picture');
 const bigPictureCancelElement = document.querySelector('.big-picture__cancel');
 const socialCommentsListElement = document.querySelector('.social__comments');
@@ -56,17 +58,29 @@ commentsLoaderElement.addEventListener('click', () => {
       comments++;
     }
   });
+
   commentsHidden = commentsElement.length - comments;
 
+  let makeIterator = (index, lastIndex, array) => {
+    return {
+      [Symbol.iterator]() {
+        return this;
+      },
+      next() {
+        return array[index] !== array[lastIndex] ? {value: array[index++], done: false} : {done: true}
+      },
+    }
+  }
+
   if (commentsHidden <= DEFAULT_COMMENT_COUNTER) {
-    for (let i = comments; i < commentsElement.length; i++) {
-      commentsElement[i].classList.remove('hidden');
+    for (let element of makeIterator(comments, commentsElement.length, commentsElement)) {
+      element.classList.remove('hidden');
     }
     socialCommentCountElement.textContent = commentsElement.length + ' из ' + commentsElement.length + ' комментариев';
     document.querySelector('.social__comments-loader').classList.add('hidden');
   } else {
-    for (let i = comments, j = 0; j < DEFAULT_COMMENT_COUNTER; i++, j++) {
-      commentsElement[i].classList.remove('hidden');
+    for (let element of makeIterator(comments, comments + DEFAULT_COMMENT_COUNTER, commentsElement)) {
+      element.classList.remove('hidden');
     }
     comments += DEFAULT_COMMENT_COUNTER;
     socialCommentCountElement.textContent = comments + ' из ' + commentsElement.length + ' комментариев';

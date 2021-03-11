@@ -1,3 +1,5 @@
+'use strict';
+
 import {getRandomNumber} from './util.js';
 
 const NAMES = [

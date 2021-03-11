@@ -1,3 +1,5 @@
+'use strict';
+
 /* global noUiSlider */
 
 const upLoadFileElement = document.querySelector('#upload-file');
@@ -39,6 +41,7 @@ const EFFECT_REVIEW_HEAT_MAX = 3;
 const EFFECT_REVIEW_HEAT_STEP = 0.1;
 const EFFECT_REVIEW_HEAT_START = 3;
 const DEFAULT_SCALE_VALUE = '100%';
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -79,6 +82,21 @@ const displayEditModal = () => {
     bodyElement.classList.add('modal-open');
     previewImageElement.style.filter = 'none';
     scaleControlBiggerElement.setAttribute('disabled', 'disabled');
+
+    const file = upLoadFileElement.files[0];
+    const fileName = file.name.toLowerCase();
+    const matches = FILE_TYPES.some((it) => {
+      return fileName.endsWith(it);
+    });
+    if (matches) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        previewImageElement.setAttribute('src', reader.result);
+      });
+
+      reader.readAsDataURL(file);
+    }
   });
 }
 

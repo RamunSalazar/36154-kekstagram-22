@@ -1,3 +1,5 @@
+'use strict';
+
 import {showAlert} from './util.js';
 import {cleanEditModal} from './edit-modal.js';
 

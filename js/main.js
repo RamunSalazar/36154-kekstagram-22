@@ -1,3 +1,4 @@
+'use strict';
 /* global _:readonly */
 
 import {displayEditModal, closeEditModal, scaleUpLoadImage, changeFilterEffect} from './edit-modal.js';

@@ -7,13 +7,13 @@ import {getServerData, sendServerData} from './server.js';
 import {drawingThumbnailPhoto} from './thumbnail-photo.js';
 import {filterDefault, filterRandom, filterDiscussed} from './filters.js';
 
-const RERENDER_DELAY = 500;
+const RENDER_DELAY = 500;
 
 getServerData((photos) => {
   drawingThumbnailPhoto(photos);
-  filterDefault(photos, _.debounce(newPhotos => drawingThumbnailPhoto(newPhotos), RERENDER_DELAY));
-  filterRandom(photos, _.debounce(newPhotos => drawingThumbnailPhoto(newPhotos), RERENDER_DELAY));
-  filterDiscussed(photos, _.debounce(newPhotos => drawingThumbnailPhoto(newPhotos), RERENDER_DELAY));
+  filterDefault(photos, _.debounce(newPhotos => drawingThumbnailPhoto(newPhotos), RENDER_DELAY));
+  filterRandom(photos, _.debounce(newPhotos => drawingThumbnailPhoto(newPhotos), RENDER_DELAY));
+  filterDiscussed(photos, _.debounce(newPhotos => drawingThumbnailPhoto(newPhotos), RENDER_DELAY));
 });
 displayEditModal();
 closeEditModal();

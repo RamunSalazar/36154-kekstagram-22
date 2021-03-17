@@ -13,6 +13,8 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const effectRadioListElement = document.querySelectorAll('.effects__radio');
 const effectSpanListElement = document.querySelectorAll('.effects__preview');
 const effectInputElement = document.querySelector('.effect-level__value');
+const hashtagInputElement = document.querySelector('.text__hashtags');
+const commentTextAreaElement = document.querySelector('.text__description');
 
 const ESCAPE_KEY_CODE = 27;
 const SCALE_STEP = 25;
@@ -74,6 +76,8 @@ const cleanEditModal = () => {
   previewImageElement.className = '';
   document.querySelector('#effect-none').checked = 'true';
   scaleControlSmallerElement.removeAttribute('disabled');
+  hashtagInputElement.value = '';
+  commentTextAreaElement.value = '';
 }
 
 const displayEditModal = () => {

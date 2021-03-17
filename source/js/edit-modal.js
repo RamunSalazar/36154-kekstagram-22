@@ -1,6 +1,5 @@
-'use strict';
-
 /* global noUiSlider */
+'use strict';
 
 const upLoadFileElement = document.querySelector('#upload-file');
 const imageUpLoadOverlayElement = document.querySelector('.img-upload__overlay');
@@ -74,6 +73,7 @@ const cleanEditModal = () => {
   previewImageElement.style.transform = String('scale(' + parseInt(DEFAULT_SCALE_VALUE.slice(0, -1))/SCALE_DIVIDER + ')');
   previewImageElement.className = '';
   document.querySelector('#effect-none').checked = 'true';
+  scaleControlSmallerElement.removeAttribute('disabled');
 }
 
 const displayEditModal = () => {
@@ -82,6 +82,7 @@ const displayEditModal = () => {
     bodyElement.classList.add('modal-open');
     previewImageElement.style.filter = 'none';
     scaleControlBiggerElement.setAttribute('disabled', 'disabled');
+    scaleInputElement.setAttribute('value', DEFAULT_SCALE_VALUE);
 
     const file = upLoadFileElement.files[0];
     const fileName = file.name.toLowerCase();
@@ -113,9 +114,8 @@ const closeEditModal = () => {
 };
 
 const scaleUpLoadImage = () => {
-  let value = parseInt(scaleInputElement.value.slice(0, -1));
-
   scaleControlSmallerElement.addEventListener('click', () => {
+    let value = parseInt(scaleInputElement.value.slice(0, -1));
     value -= SCALE_STEP;
 
     if (value === IMAGE_SCALE_MIN) {
@@ -128,6 +128,7 @@ const scaleUpLoadImage = () => {
   });
 
   scaleControlBiggerElement.addEventListener('click', () => {
+    let value = parseInt(scaleInputElement.value.slice(0, -1));
     value += SCALE_STEP;
 
     if (value === IMAGE_SCALE_MAX) {

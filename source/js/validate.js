@@ -9,12 +9,7 @@ const HASHTAG_LENGTH_MAX = 20;
 const HASHTAGS_ARRAY_LENGTH_MAX = 5;
 
 const isHashtagLetter = (hashtag) => {
-  const pattern = /[А-Яа-яёЁ0-9]/;
-  return pattern.test(hashtag);
-}
-
-const isHashtaEnglishgLetter = (hashtag) => {
-  const pattern = /[A-Za-z]/;
+  const pattern = /[А-Яа-яёA-Za-zЁ0-9]/;
   return pattern.test(hashtag);
 }
 
@@ -67,13 +62,13 @@ const validateHashtags = () => {
         } else if (hashtagsArray[i].length > HASHTAG_LENGTH_MAX) {
           hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может быть длиннее 20 сиволов включая символ #');
-        } else if (!isHashtagLetter(hashtagsArray[i]) && isHashtaEnglishgLetter(hashtagsArray[i])) {
+        } else if (!isHashtagLetter(hashtagsArray[i])) {
           hashtagInputElement.classList.add('validate-error');
-          hashtagInputElement.setCustomValidity('Хештег должен быть написан кирилицей, может содержать как строчные так и прописные буквы, а так же цыфры');
+          hashtagInputElement.setCustomValidity('Хештег может быть написан как строчными так и прописныеми буквами, а так же может содержать цифры');
         } else if (isHashtagSymbol(hashtagsArray[i])) {
           hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может содержать специальных символов');
-        } else if (isHashtagEmoji(hashtagsArray[i])) {
+        } else if (!isHashtagEmoji(hashtagsArray[i])) {
           hashtagInputElement.classList.add('validate-error');
           hashtagInputElement.setCustomValidity('Хештег не может содержать эмодзи');
         } else if (isHashtagSharp(hashtagsArray[i])) {

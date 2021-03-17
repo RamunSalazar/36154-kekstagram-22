@@ -33,7 +33,7 @@ const displayFetchMEssage = (str) => {
   });
 
   window.addEventListener('click', (evt) => {
-    if (evt.target.className == 'success') {
+    if (evt.target.classList.contains(`${str}`)) {
       bodyElement.classList.remove('modal-open');
       section.classList.add('hidden');
     }
@@ -48,7 +48,7 @@ const getServerData = (onSuccess) => {
     } else {
       showAlert('Ошибка сервера!');
     }
-  }).then((photo) => onSuccess(photo));
+  }).then((photo) => onSuccess(photo)).catch(() => showAlert('Ошибка сервера!'));
 }
 
 const sendServerData = () => {
@@ -66,7 +66,7 @@ const sendServerData = () => {
       } else {
         displayFetchMEssage('error');
       }
-    });
+    }).catch(() => displayFetchMEssage('error'));
   });
 }
 

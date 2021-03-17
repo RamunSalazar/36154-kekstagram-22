@@ -10,6 +10,7 @@ const commentsLoaderElement = document.querySelector('.comments-loader');
 const bodyElement = document.querySelector('.body');
 
 const DEFAULT_COMMENT_COUNTER = 5;
+const ESCAPE_KEY_CODE = 27;
 
 const displayFullSizePhoto = (picture) => {
   return (evt) => {
@@ -45,6 +46,18 @@ const displayFullSizePhoto = (picture) => {
     });
 
     socialCommentsListElement.appendChild(fragment);
+
+    bigPictureCancelElement.addEventListener('click', () => {
+      bigPictureElement.classList.add('hidden');
+      bodyElement.classList.remove('modal-open');
+    });
+
+    window.addEventListener('keydown', (evt) => {
+      if (evt.keyCode === ESCAPE_KEY_CODE) {
+        bigPictureElement.classList.add('hidden');
+        bodyElement.classList.remove('modal-open');
+      }
+    });
   }
 }
 
@@ -85,11 +98,6 @@ commentsLoaderElement.addEventListener('click', () => {
     comments += DEFAULT_COMMENT_COUNTER;
     socialCommentCountElement.textContent = comments + ' из ' + commentsElement.length + ' комментариев';
   }
-});
-
-bigPictureCancelElement.addEventListener('click', () => {
-  bigPictureElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
 });
 
 export {displayFullSizePhoto};

@@ -1,5 +1,5 @@
-'use strict';
 /* global _:readonly */
+'use strict';
 
 import {displayEditModal, closeEditModal, scaleUpLoadImage, changeFilterEffect} from './edit-modal.js';
 import {validateHashtags, validateComments} from './validate.js';
